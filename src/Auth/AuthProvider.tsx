@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import AuthContext from './AuthContext';
-import axios from 'axios';
-import { tokenManager } from './TokenManager';
-import { LOGIN_URL, LOGOUT_URL, REFRESH_TOKEN_URL } from '../constants';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from "react";
+import AuthContext from "./AuthContext";
+import axios from "axios";
+import { tokenManager } from "./TokenManager";
+import { LOGIN_URL, LOGOUT_URL, REFRESH_TOKEN_URL } from "../constants";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type SuccessfulAuth = {
     accessToken: string;
@@ -11,8 +11,8 @@ type SuccessfulAuth = {
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const axiosInstance = axios.create({
         withCredentials: true,
-        responseType: 'json',
-        baseURL: 'http://localhost:3003',
+        responseType: "json",
+        baseURL: process.env.BASE_URL,
     });
 
     const { pathname } = useLocation();
@@ -23,11 +23,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const response = await axiosInstance.post(REFRESH_TOKEN_URL);
             const accessToken = (response.data as SuccessfulAuth).accessToken;
-            console.log('Token Refreshed');
+            console.log("Token Refreshed");
             tokenManager.setToken(accessToken);
             return true;
         } catch (e) {
-            console.log('Unable to refresh token', e);
+            console.log("Unable to refresh token", e);
         }
         return false;
     };
@@ -39,10 +39,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const asyncMethod = async () => {
             if (await isUserLoggedIn()) {
-                if (pathname.startsWith('/login'))
-                    navigate('/users', { replace: true });
+                if (pathname.startsWith("/login"))
+                    navigate("/users", { replace: true });
             } else {
-                navigate('/login', { replace: true });
+                navigate("/login", { replace: true });
             }
             setBlocked(false);
         };
@@ -61,7 +61,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             console.log(tokenManager.getToken());
             return true;
         } catch (e) {
-            console.log('Error Logging In', e);
+            console.log("Error Logging In", e);
         }
         return false;
     };
@@ -72,7 +72,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             tokenManager.removeToken();
             return true;
         } catch (e) {
-            console.log('Error Logging Out', e);
+            console.log("Error Logging Out", e);
         }
         return false;
     };

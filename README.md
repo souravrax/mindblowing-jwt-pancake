@@ -1,1 +1,1 @@
-"# mindblowing-jwt-pancake" 
+"# mindblowing-jwt-pancake"

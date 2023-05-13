@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { GET_USERS_URL } from '../../constants';
-import { tokenManager } from '../../Auth/TokenManager';
-import { VerticalContainer } from '../../styles/Global.styles';
-import { Table } from 'baseui/table-semantic';
-import { Pagination } from 'baseui/pagination';
-import useAuth from '../../Auth/useAuth';
-import { DisplayLarge } from 'baseui/typography';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { GET_USERS_URL } from "../../constants";
+import { tokenManager } from "../../Auth/TokenManager";
+import { VerticalContainer } from "../../styles/Global.styles";
+import { Table } from "baseui/table-semantic";
+import { Pagination } from "baseui/pagination";
+import useAuth from "../../Auth/useAuth";
+import { DisplayLarge } from "baseui/typography";
 
 const axiosInstance = axios.create({
     withCredentials: true,
-    responseType: 'json',
-    baseURL: 'http://localhost:3003',
+    responseType: "json",
+    baseURL: process.env.BASE_URL,
 });
 
 export default function Users() {
@@ -35,10 +35,10 @@ export default function Users() {
                 console.log(response.data.data);
                 setData(
                     response.data.data.map((d: { [x: string]: unknown }) => [
-                        d['id'],
-                        d['email'],
-                        d['first_name'],
-                        d['last_name'],
+                        d["id"],
+                        d["email"],
+                        d["first_name"],
+                        d["last_name"],
                     ])
                 );
             } catch (e) {
@@ -52,7 +52,7 @@ export default function Users() {
         <VerticalContainer>
             <DisplayLarge>Users</DisplayLarge>
             <Table
-                columns={['ID', 'Email', 'First Name', 'Last Name']}
+                columns={["ID", "Email", "First Name", "Last Name"]}
                 data={data}
                 isLoading={data.length === 0}
             />

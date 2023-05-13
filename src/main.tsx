@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App/App';
-import './index.css';
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App/App";
+import "./index.css";
 
-import { Client as Styletron } from 'styletron-engine-atomic';
-import { Provider as StyletronProvider } from 'styletron-react';
-import { LightTheme, DarkTheme, BaseProvider } from 'baseui';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Login from './pages/Login/Login';
-import Users from './pages/Users/Users';
-import AuthProvider from './Auth/AuthProvider';
-import { SnackbarProvider } from 'baseui/snackbar';
+import { Client as Styletron } from "styletron-engine-atomic";
+import { Provider as StyletronProvider } from "styletron-react";
+import { LightTheme, DarkTheme, BaseProvider } from "baseui";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import Users from "./pages/Users/Users";
+import AuthProvider from "./Auth/AuthProvider";
+import { SnackbarProvider } from "baseui/snackbar";
 
 const engine = new Styletron();
 
@@ -49,6 +49,6 @@ const Root = () => {
     );
 };
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <Root />
 );

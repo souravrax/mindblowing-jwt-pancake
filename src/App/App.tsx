@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
     HeaderNavigation,
     ALIGN,
     StyledNavigationList,
     StyledNavigationItem,
-} from 'baseui/header-navigation';
-import { useSnackbar } from 'baseui/snackbar';
-import { Button, SIZE } from 'baseui/button';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import useAuth from '../Auth/useAuth';
-import { tokenManager } from '../Auth/TokenManager';
+} from "baseui/header-navigation";
+import { useSnackbar } from "baseui/snackbar";
+import { Button, SIZE } from "baseui/button";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../Auth/useAuth";
+import { tokenManager } from "../Auth/TokenManager";
 
 // type AppProps = {
 //     onToggle: () => void;
@@ -22,10 +22,10 @@ export default function App() {
 
     const logoutHandler = async () => {
         if (await logout()) {
-            navigate('/login', { replace: true });
+            navigate("/login", { replace: true });
         } else {
             enqueue({
-                message: 'No User Logged In',
+                message: "No User Logged In",
             });
         }
     };

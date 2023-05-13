@@ -1,7 +1,7 @@
 export const tokenManager = new (class TokenManager {
     accessToken: string;
     constructor() {
-        this.accessToken = '';
+        this.accessToken = "";
     }
     setToken(newToken: string) {
         this.accessToken = newToken;
@@ -14,7 +14,7 @@ export const tokenManager = new (class TokenManager {
         return this.accessToken;
     }
     removeToken() {
-        this.accessToken = '';
+        this.accessToken = "";
     }
     hasToken() {
         return this.accessToken.length > 0;
