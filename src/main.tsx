@@ -10,7 +10,7 @@ import AuthProvider from "./Auth/AuthProvider";
 import { SnackbarProvider } from "baseui/snackbar";
 import { ToasterContainer } from "baseui/toast";
 import { ROUTES } from "./constants";
-import useLocalStorage from "./hooks/useLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 import Suspense from "./components/Suspense/Suspense";
 const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
