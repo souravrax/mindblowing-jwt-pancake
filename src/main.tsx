@@ -6,7 +6,7 @@ import "./index.css";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, DarkTheme, BaseProvider } from "baseui";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Users from "./pages/Users/Users";
 import AuthProvider from "./Auth/AuthProvider";
@@ -27,7 +27,7 @@ const Root = () => {
     const [css, theme] = useStyletron();
     return (
         <BaseProvider theme={darkTheme ? DarkTheme : LightTheme}>
-            <BrowserRouter>
+            <HashRouter>
                 <AuthProvider>
                     <StyletronProvider value={engine}>
                         <SnackbarProvider>
@@ -73,7 +73,7 @@ const Root = () => {
                         </SnackbarProvider>
                     </StyletronProvider>
                 </AuthProvider>
-            </BrowserRouter>
+            </HashRouter>
         </BaseProvider>
     );
 };
