@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import AuthContext from "./AuthContext";
 import axios from "axios";
 import { accessTokenManager } from "./TokenManager";
@@ -20,7 +20,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    const [blocked, setBlocked] = useState(true);
 
     const refreshToken = async () => {
         try {
@@ -39,16 +38,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return accessTokenManager.hasToken() || (await refreshToken());
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const asyncMethod = async () => {
-            if (
-                !pathname.startsWith(ROUTES.LOGIN_URL) &&
-                !pathname.startsWith(ROUTES.SIGNUP_URL) &&
-                !(await isUserLoggedIn())
-            ) {
-                navigate("/login", { replace: true });
+            const userLoggedIn = await isUserLoggedIn();
+            const isAuthPage =
+                pathname.startsWith(ROUTES.LOGIN_URL) ||
+                pathname.startsWith(ROUTES.SIGNUP_URL);
+            if (!isAuthPage && !userLoggedIn) {
+                navigate(ROUTES.LOGIN_URL, { replace: true });
+            } else if (isAuthPage && userLoggedIn) {
+                navigate(ROUTES.DEFAULT_PAGE_URL, { replace: true });
             }
-            setBlocked(false);
         };
         asyncMethod();
     }, [pathname]);
@@ -111,8 +111,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <AuthContext.Provider value={contextValue}>
-            {blocked ? null : children}
-            {/* Hello */}
+            {children}
         </AuthContext.Provider>
     );
 };

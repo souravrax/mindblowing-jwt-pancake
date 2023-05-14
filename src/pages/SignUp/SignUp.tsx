@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Button } from "baseui/button";
-import { DisplayLarge } from "baseui/typography";
-import { FormControl } from "baseui/form-control";
+import { DisplayLarge, ParagraphSmall } from "baseui/typography";
+import { FormControl, StyledCaption } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Auth/useAuth";
 import { useSnackbar } from "baseui/snackbar";
 import { toaster } from "baseui/toast";
 import AuthContainerCard from "../../components/AuthContainerCard";
 import { StyledBody, StyledAction } from "baseui/card";
+import { ROUTES } from "../../constants";
+import { useStyletron } from "baseui";
 
 const SignUp = () => {
     const [name, setName] = useState("");
@@ -17,7 +19,7 @@ const SignUp = () => {
     const [loading, setLoading] = useState(false);
     const { createUser } = useAuth();
     const snackbar = useSnackbar();
-    const navigate = useNavigate();
+    const [css, theme] = useStyletron();
     const signUpHandler = async () => {
         setLoading(true);
         if (!(await createUser(name, username, password))) {
@@ -40,7 +42,7 @@ const SignUp = () => {
     };
     return (
         <AuthContainerCard>
-            <DisplayLarge>SignUp</DisplayLarge>
+            <DisplayLarge>Sign Up</DisplayLarge>
             <StyledBody>
                 <FormControl label={() => "Full Name"} htmlFor={undefined}>
                     <Input
@@ -77,9 +79,23 @@ const SignUp = () => {
                         },
                     }}
                 >
-                    SignUp
+                    Create Account
                 </Button>
             </StyledAction>
+            <StyledCaption>
+                <ParagraphSmall>
+                    {`Already have an account?`}
+                    <Link
+                        to={ROUTES.LOGIN_URL}
+                        style={{
+                            color: theme.colors.accent,
+                        }}
+                    >
+                        {" "}
+                        Click Here
+                    </Link>
+                </ParagraphSmall>
+            </StyledCaption>
         </AuthContainerCard>
     );
 };

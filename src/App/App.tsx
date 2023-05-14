@@ -78,7 +78,7 @@ export default function App({ onToggle }: AppProps) {
                             Toggle Theme
                         </Button>
                     </StyledNavigationItem>
-                    <StyledNavigationItem>
+                    {/* <StyledNavigationItem>
                         <Link to={ROUTES.LOGIN_URL}>
                             <Button
                                 shape="pill"
@@ -99,7 +99,7 @@ export default function App({ onToggle }: AppProps) {
                                 Create Account
                             </Button>
                         </Link>
-                    </StyledNavigationItem>
+                    </StyledNavigationItem> */}
                     {accessTokenManager.hasToken() && (
                         <StyledNavigationItem>
                             <Button

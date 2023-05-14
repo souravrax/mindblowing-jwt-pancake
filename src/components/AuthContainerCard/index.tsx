@@ -5,7 +5,19 @@ import { AuthContainer } from "./style";
 const AuthContainerCard = ({ children }: { children: React.ReactNode }) => {
     return (
         <AuthContainer>
-            <Card>{children}</Card>;
+            <Card
+                overrides={{
+                    Root: {
+                        style: {
+                            width: "40%",
+                            minWidth: '380px'
+                        },
+                    },
+                }}
+            >
+                {children}
+            </Card>
+            ;
         </AuthContainer>
     );
 };

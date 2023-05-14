@@ -1,7 +1,9 @@
 export const ROUTES = {
     LOGIN_URL: "/login",
     SIGNUP_URL: "/create-account",
+    DEFAULT_PAGE_URL: "/users",
     USERS_URL: "/users",
+    FORGOT_PASSWORD: "/create-account",
 };
 
 export const API_URL = {
