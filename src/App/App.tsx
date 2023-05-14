@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import {
     HeaderNavigation,
     ALIGN,
@@ -23,7 +23,8 @@ type AppProps = {
 };
 
 export default function App({ onToggle }: AppProps) {
-    const { logout } = useAuth();
+    const [loggedIn, setLoggedIn] = useState(false);
+    const { logout, isUserLoggedIn } = useAuth();
     const navigate = useNavigate();
     const { enqueue } = useSnackbar();
 
@@ -38,6 +39,12 @@ export default function App({ onToggle }: AppProps) {
             });
         }
     };
+
+    useEffect(() => {
+        (async () => {
+            setLoggedIn(await isUserLoggedIn());
+        })();
+    }, []);
 
     return (
         <StyledAppContainer
@@ -62,11 +69,9 @@ export default function App({ onToggle }: AppProps) {
                         <HeadingSmall>JWT Example (by Sourav)</HeadingSmall>
                     </StyledNavigationItem>
                 </StyledNavigationList>
-                <StyledNavigationList $align={ALIGN.center}>
-                    {/* <StyledNavigationItem>
-                        <Link to="/users">Users</Link>
-                    </StyledNavigationItem> */}
-                </StyledNavigationList>
+                <StyledNavigationList
+                    $align={ALIGN.center}
+                ></StyledNavigationList>
                 <StyledNavigationList $align={ALIGN.right}>
                     <StyledNavigationItem>
                         <Button
@@ -78,29 +83,8 @@ export default function App({ onToggle }: AppProps) {
                             Toggle Theme
                         </Button>
                     </StyledNavigationItem>
-                    {/* <StyledNavigationItem>
-                        <Link to={ROUTES.LOGIN_URL}>
-                            <Button
-                                shape="pill"
-                                kind="tertiary"
-                                size={SIZE.compact}
-                            >
-                                Log In
-                            </Button>
-                        </Link>
-                    </StyledNavigationItem>
-                    <StyledNavigationItem>
-                        <Link to={ROUTES.SIGNUP_URL}>
-                            <Button
-                                shape="pill"
-                                kind="primary"
-                                size={SIZE.compact}
-                            >
-                                Create Account
-                            </Button>
-                        </Link>
-                    </StyledNavigationItem> */}
-                    {accessTokenManager.hasToken() && (
+
+                    {loggedIn && (
                         <StyledNavigationItem>
                             <Button
                                 onClick={logoutHandler}
