@@ -4,7 +4,7 @@ export const AuthContainer = styled("div", {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: 'fit-content',
+    minHeight: "fit-content",
     height: "100%",
     width: "100%",
 });

@@ -1,30 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App/App";
 import "./index.css";
-
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, DarkTheme, BaseProvider } from "baseui";
-import { BrowserRouter, HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login/Login";
-import Users from "./pages/Users/Users";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import AuthProvider from "./Auth/AuthProvider";
 import { SnackbarProvider } from "baseui/snackbar";
-import SignUp from "./pages/SignUp/SignUp";
 import { ToasterContainer } from "baseui/toast";
 import { ROUTES } from "./constants";
-import { StyledAppContainer } from "./styles/Global.styles";
-import { useStyletron } from "baseui";
+import useLocalStorage from "./hooks/useLocalStorage";
+
+import Suspense from "./components/Suspense/Suspense";
+const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
+const Login = React.lazy(() => import("./pages/Login/Login"));
+const Users = React.lazy(() => import("./pages/Users/Users"));
 
 const engine = new Styletron();
 
 const Root = () => {
-    const [darkTheme, setDarkTheme] = useState<number>(0);
+    const [darkTheme, setDarkTheme] = useLocalStorage<number>("darkTheme", 0);
     const toggleTheme = () => {
         setDarkTheme((theme) => theme ^ 1);
     };
-    const [css, theme] = useStyletron();
     return (
         <BaseProvider theme={darkTheme ? DarkTheme : LightTheme}>
             <HashRouter>
@@ -39,15 +38,27 @@ const Root = () => {
                                     >
                                         <Route
                                             path={ROUTES.LOGIN_URL}
-                                            element={<Login />}
+                                            element={
+                                                <Suspense>
+                                                    <Login />
+                                                </Suspense>
+                                            }
                                         />
                                         <Route
                                             path={ROUTES.USERS_URL}
-                                            element={<Users />}
+                                            element={
+                                                <Suspense>
+                                                    <Users />
+                                                </Suspense>
+                                            }
                                         />
                                         <Route
                                             path={ROUTES.SIGNUP_URL}
-                                            element={<SignUp />}
+                                            element={
+                                                <Suspense>
+                                                    <SignUp />
+                                                </Suspense>
+                                            }
                                         />
                                         <Route
                                             path="/"
