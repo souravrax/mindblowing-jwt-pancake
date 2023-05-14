@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "baseui/button";
 import { DisplayLarge } from "baseui/typography";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { StyledLoginPage } from "./Login.styles";
-import { Container } from "../../styles/Global.styles";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Auth/useAuth";
+import AuthContainerCard from "../../components/AuthContainerCard";
+import { StyledAction, StyledBody } from "baseui/card";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -19,19 +19,11 @@ const Login = () => {
             navigate("/users", { replace: true });
         }
     };
-    // useEffect(() => {
-    //     const isUserLoggedInAsync = async () => {
-    //         if (await isUserLoggedIn()) {
-    //             navigate('/users', { replace: true });
-    //         }
-    //         setLoading(false);
-    //     };
-    //     isUserLoggedInAsync();
-    // }, []);
+
     return (
-        <Container>
-            <StyledLoginPage>
-                <DisplayLarge>Login</DisplayLarge>
+        <AuthContainerCard>
+            <DisplayLarge>Login</DisplayLarge>
+            <StyledBody>
                 <FormControl label={() => "Username"} htmlFor={undefined}>
                     <Input
                         placeholder="imawesome"
@@ -47,9 +39,22 @@ const Login = () => {
                         type="password"
                     />
                 </FormControl>
-                <Button onClick={loginHandler}>Login</Button>
-            </StyledLoginPage>
-        </Container>
+            </StyledBody>
+            <StyledAction>
+                <Button
+                    onClick={loginHandler}
+                    overrides={{
+                        BaseButton: {
+                            style: {
+                                width: "100%",
+                            },
+                        },
+                    }}
+                >
+                    Login
+                </Button>
+            </StyledAction>
+        </AuthContainerCard>
     );
 };
 

@@ -1,14 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
 import AuthContext from "./AuthContext";
 import axios from "axios";
-import { tokenManager } from "./TokenManager";
-import { LOGIN_URL, LOGOUT_URL, REFRESH_TOKEN_URL } from "../constants";
+import { accessTokenManager } from "./TokenManager";
+import { API_URL, ROUTES } from "../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type SuccessfulAuth = {
-    accessToken: string;
+    status_code: number;
+    access_token: string;
 };
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+    const { CREATE_USER_URL, LOGIN_URL, LOGOUT_URL, REFRESH_TOKEN_URL } =
+        API_URL;
     const axiosInstance = axios.create({
         withCredentials: true,
         responseType: "json",
@@ -22,9 +25,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const refreshToken = async () => {
         try {
             const response = await axiosInstance.post(REFRESH_TOKEN_URL);
-            const accessToken = (response.data as SuccessfulAuth).accessToken;
+            const accessToken = (response.data as SuccessfulAuth).access_token;
             console.log("Token Refreshed");
-            tokenManager.setToken(accessToken);
+            accessTokenManager.setToken(accessToken);
             return true;
         } catch (e) {
             console.log("Unable to refresh token", e);
@@ -33,15 +36,16 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const isUserLoggedIn = async () => {
-        return tokenManager.hasToken() || (await refreshToken());
+        return accessTokenManager.hasToken() || (await refreshToken());
     };
 
     useEffect(() => {
         const asyncMethod = async () => {
-            if (await isUserLoggedIn()) {
-                if (pathname.startsWith("/login"))
-                    navigate("/users", { replace: true });
-            } else {
+            if (
+                !pathname.startsWith(ROUTES.LOGIN_URL) &&
+                !pathname.startsWith(ROUTES.SIGNUP_URL) &&
+                !(await isUserLoggedIn())
+            ) {
                 navigate("/login", { replace: true });
             }
             setBlocked(false);
@@ -56,9 +60,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 password,
             });
             const data = response.data as SuccessfulAuth;
-            tokenManager.setToken(data.accessToken);
-            console.log(response.headers);
-            console.log(tokenManager.getToken());
+            accessTokenManager.setToken(data.access_token);
             return true;
         } catch (e) {
             console.log("Error Logging In", e);
@@ -68,13 +70,32 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const logout = async () => {
         try {
-            await axiosInstance.delete(LOGOUT_URL);
-            tokenManager.removeToken();
+            const response = await axiosInstance.delete(LOGOUT_URL);
+            accessTokenManager.removeToken();
+            console.log(response.data);
             return true;
         } catch (e) {
             console.log("Error Logging Out", e);
         }
         return false;
+    };
+
+    const createUser = async (
+        name: string,
+        username: string,
+        password: string
+    ) => {
+        try {
+            const response = await axiosInstance.post(CREATE_USER_URL, {
+                name,
+                username,
+                password,
+            });
+            return true;
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
     };
 
     const contextValue = useMemo(
@@ -83,6 +104,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             isUserLoggedIn,
             login,
             logout,
+            createUser,
         }),
         []
     );

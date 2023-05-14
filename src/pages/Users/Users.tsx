@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { GET_USERS_URL } from "../../constants";
-import { tokenManager } from "../../Auth/TokenManager";
+import { API_URL } from "../../constants";
+import { accessTokenManager } from "../../Auth/TokenManager";
 import { VerticalContainer } from "../../styles/Global.styles";
 import { Table } from "baseui/table-semantic";
 import { Pagination } from "baseui/pagination";
@@ -24,14 +24,17 @@ export default function Users() {
                 await refreshToken();
             }
             try {
-                const response = await axiosInstance.get(GET_USERS_URL, {
-                    params: {
-                        page: pageNumber,
-                    },
-                    headers: {
-                        Authorization: `Bearer ${tokenManager.getToken()}`,
-                    },
-                });
+                const response = await axiosInstance.get(
+                    API_URL.GET_USERS_URL,
+                    {
+                        params: {
+                            page: pageNumber,
+                        },
+                        headers: {
+                            Authorization: `Bearer ${accessTokenManager.getToken()}`,
+                        },
+                    }
+                );
                 console.log(response.data.data);
                 setData(
                     response.data.data.map((d: { [x: string]: unknown }) => [

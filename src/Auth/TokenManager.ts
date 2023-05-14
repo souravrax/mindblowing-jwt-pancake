@@ -1,4 +1,4 @@
-export const tokenManager = new (class TokenManager {
+export const accessTokenManager = new (class TokenManager {
     accessToken: string;
     constructor() {
         this.accessToken = "";
@@ -17,6 +17,6 @@ export const tokenManager = new (class TokenManager {
         this.accessToken = "";
     }
     hasToken() {
-        return this.accessToken.length > 0;
+        return this.accessToken?.length > 0;
     }
 })();

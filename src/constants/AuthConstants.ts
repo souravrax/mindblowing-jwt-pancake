@@ -1,6 +1,14 @@
-export const REFRESH_TOKEN_URL = "/auth/token";
-export const LOGIN_URL = "/auth/login";
-export const LOGOUT_URL = "/auth/logout";
-export const CREATE_USER_URL = "/auth/create-user";
-export const GET_USER_URL = "/api/user";
-export const GET_USERS_URL = "/api/users";
+export const ROUTES = {
+    LOGIN_URL: "/login",
+    SIGNUP_URL: "/create-account",
+    USERS_URL: "/users",
+};
+
+export const API_URL = {
+    REFRESH_TOKEN_URL: "/auth/token",
+    LOGIN_URL: "/auth/login",
+    LOGOUT_URL: "/auth/logout",
+    CREATE_USER_URL: "/auth/create-user",
+    GET_USER_URL: "/api/user",
+    GET_USERS_URL: "/api/users",
+};
