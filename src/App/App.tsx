@@ -89,7 +89,6 @@ export default function App({ onToggle }: AppProps) {
                             <Button
                                 onClick={logoutHandler}
                                 size={SIZE.compact}
-                                disabled={!loggedIn}
                             >
                                 Logout
                             </Button>
