@@ -7,9 +7,8 @@ import {
 } from "baseui/header-navigation";
 import { useSnackbar } from "baseui/snackbar";
 import { Button, SIZE } from "baseui/button";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../Auth/useAuth";
-import { accessTokenManager } from "../Auth/TokenManager";
 import { HeadingSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
 import {
@@ -32,7 +31,7 @@ export default function App({ onToggle }: AppProps) {
 
     const logoutHandler = async () => {
         if (await logout()) {
-            navigate("/login", { replace: true });
+            navigate(ROUTES.LOGIN_URL, { replace: true });
         } else {
             enqueue({
                 message: "No User Logged In",

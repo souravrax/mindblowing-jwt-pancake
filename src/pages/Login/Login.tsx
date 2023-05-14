@@ -25,7 +25,7 @@ const Login = () => {
     const loginHandler = async () => {
         setLoading(true);
         if (await login(username, password)) {
-            navigate("/users", { replace: true });
+            navigate(ROUTES.LOGIN_URL, { replace: true });
         }
         setLoading(false);
     };
