@@ -17,7 +17,6 @@ const AuthContainerCard = ({ children }: { children: React.ReactNode }) => {
             >
                 {children}
             </Card>
-            ;
         </AuthContainer>
     );
 };

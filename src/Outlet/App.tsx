@@ -65,13 +65,13 @@ export default function App({ onToggle }: AppProps) {
                     />
                 </Button>
             </div>
-            <a
+            {/* <a
                 href="https://github.com/souravrax/mindblowing-jwt-pancake"
                 target="_blank"
                 rel="noreferrer"
             >
                 <GithubLogo />
-            </a>
+            </a> */}
             <Outlet />
         </StyledAppContainer>
     );
