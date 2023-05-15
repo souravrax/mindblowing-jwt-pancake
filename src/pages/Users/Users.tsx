@@ -7,6 +7,7 @@ import { Table } from "baseui/table-semantic";
 import { Pagination } from "baseui/pagination";
 import useAuth from "../../Auth/useAuth";
 import { DisplayLarge } from "baseui/typography";
+import SideNav from "../../components/SideNav";
 
 const axiosInstance = axios.create({
     withCredentials: true,
@@ -53,6 +54,7 @@ export default function Users() {
 
     return (
         <VerticalContainer>
+            <SideNav />
             <DisplayLarge>Users</DisplayLarge>
             <Table
                 columns={["ID", "Email", "First Name", "Last Name"]}

@@ -5,6 +5,6 @@ export const AuthContainer = styled("div", {
     justifyContent: "center",
     alignItems: "center",
     minHeight: "fit-content",
-    height: "100%",
     width: "100%",
+    marginTop: "16px",
 });

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "baseui/button";
-import { DisplayLarge, ParagraphSmall } from "baseui/typography";
+import { DisplayLarge, HeadingLarge, ParagraphSmall } from "baseui/typography";
 import { FormControl, StyledCaption } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,62 +41,64 @@ const SignUp = () => {
         setLoading(false);
     };
     return (
-        <AuthContainerCard>
+        <>
             <DisplayLarge>Sign Up</DisplayLarge>
-            <StyledBody>
-                <FormControl label={() => "Full Name"} htmlFor={undefined}>
-                    <Input
-                        placeholder="John Doe"
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                    />
-                </FormControl>
-                <FormControl label={() => "Username"} htmlFor={undefined}>
-                    <Input
-                        placeholder="johndoe5"
-                        onChange={(e) => setUsername(e.target.value)}
-                        value={username}
-                    />
-                </FormControl>
-                <FormControl label={() => "password"} htmlFor={undefined}>
-                    <Input
-                        placeholder="j0hn_$doE"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        type="password"
-                    />
-                </FormControl>
-            </StyledBody>
-            <StyledAction>
-                <Button
-                    onClick={signUpHandler}
-                    isLoading={loading}
-                    overrides={{
-                        BaseButton: {
-                            style: {
-                                width: "100%",
+            <AuthContainerCard>
+                <StyledBody>
+                    <FormControl label={() => "Full Name"} htmlFor={undefined}>
+                        <Input
+                            placeholder="John Doe"
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                        />
+                    </FormControl>
+                    <FormControl label={() => "Username"} htmlFor={undefined}>
+                        <Input
+                            placeholder="johndoe5"
+                            onChange={(e) => setUsername(e.target.value)}
+                            value={username}
+                        />
+                    </FormControl>
+                    <FormControl label={() => "password"} htmlFor={undefined}>
+                        <Input
+                            placeholder="j0hn_$doE"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            type="password"
+                        />
+                    </FormControl>
+                </StyledBody>
+                <StyledAction>
+                    <Button
+                        onClick={signUpHandler}
+                        isLoading={loading}
+                        overrides={{
+                            BaseButton: {
+                                style: {
+                                    width: "100%",
+                                },
                             },
-                        },
-                    }}
-                >
-                    Create Account
-                </Button>
-            </StyledAction>
-            <StyledCaption>
-                <ParagraphSmall>
-                    {`Already have an account?`}
-                    <Link
-                        to={ROUTES.LOGIN_URL}
-                        style={{
-                            color: theme.colors.accent,
                         }}
                     >
-                        {" "}
-                        Click Here
-                    </Link>
-                </ParagraphSmall>
-            </StyledCaption>
-        </AuthContainerCard>
+                        Create Account
+                    </Button>
+                </StyledAction>
+                <StyledCaption>
+                    <ParagraphSmall>
+                        {`Already have an account?`}
+                        <Link
+                            to={ROUTES.LOGIN_URL}
+                            style={{
+                                color: theme.colors.accent,
+                            }}
+                        >
+                            {" "}
+                            Click Here
+                        </Link>
+                    </ParagraphSmall>
+                </StyledCaption>
+            </AuthContainerCard>
+        </>
     );
 };
 

@@ -10,7 +10,7 @@ const AuthContainerCard = ({ children }: { children: React.ReactNode }) => {
                     Root: {
                         style: {
                             width: "40%",
-                            minWidth: '380px'
+                            minWidth: "380px",
                         },
                     },
                 }}
