@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Button } from "baseui/button";
-import { DisplayLarge, HeadingLarge, ParagraphSmall } from "baseui/typography";
+import {
+    DisplayLarge,
+    DisplayMedium,
+    HeadingLarge,
+    ParagraphSmall,
+} from "baseui/typography";
 import { FormControl, StyledCaption } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Link, useNavigate } from "react-router-dom";
@@ -42,7 +47,20 @@ const SignUp = () => {
     };
     return (
         <>
-            <DisplayLarge>Sign Up</DisplayLarge>
+            <DisplayLarge
+                overrides={{
+                    Block: {
+                        style: {
+                            fontFamily: "Poppins",
+                            fontWeight: "800",
+                            letterSpacing: "8px",
+                            textTransform: "uppercase",
+                        },
+                    },
+                }}
+            >
+                Sign Up
+            </DisplayLarge>
             <AuthContainerCard>
                 <StyledBody>
                     <FormControl label={() => "Full Name"} htmlFor={undefined}>

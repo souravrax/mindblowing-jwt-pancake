@@ -9,7 +9,7 @@ const AuthContainerCard = ({ children }: { children: React.ReactNode }) => {
                 overrides={{
                     Root: {
                         style: {
-                            width: "40%",
+                            width: "100%",
                             minWidth: "380px",
                         },
                     },

@@ -32,7 +32,20 @@ const Login = () => {
 
     return (
         <>
-            <DisplayLarge>Login</DisplayLarge>
+            <DisplayLarge
+                overrides={{
+                    Block: {
+                        style: {
+                            fontFamily: "Poppins",
+                            fontWeight: "800",
+                            letterSpacing: "8px",
+                            textTransform: "uppercase",
+                        },
+                    },
+                }}
+            >
+                Login
+            </DisplayLarge>
             <AuthContainerCard>
                 <StyledBody>
                     <FormControl label={() => "Username"} htmlFor={undefined}>

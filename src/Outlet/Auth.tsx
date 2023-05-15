@@ -1,5 +1,5 @@
 import React from "react";
-import { DisplayLarge, DisplayMedium, DisplaySmall } from "baseui/typography";
+import { DisplayLarge, DisplayMedium, DisplaySmall, HeadingSmall } from "baseui/typography";
 import { Outlet } from "react-router-dom";
 
 export default function AuthOutlet() {
@@ -11,12 +11,12 @@ export default function AuthOutlet() {
                 alignItems: "center",
             }}
         >
-            <DisplaySmall
+            <HeadingSmall
                 overrides={{
                     Block: {
                         style: {
                             fontFamily: "Poppins",
-                            fontWeight: "800",
+                            fontWeight: "200",
                             letterSpacing: "8px",
                             textTransform: "uppercase",
                         },
@@ -24,9 +24,16 @@ export default function AuthOutlet() {
                 }}
             >
                 JWT / Example
-            </DisplaySmall>
+            </HeadingSmall>
             <div style={{ height: "100px" }} />
-            <Outlet />
+            <div
+                data-testid="auth-outlet-container"
+                style={{
+                    width: "60%",
+                }}
+            >
+                <Outlet />
+            </div>
         </div>
     );
 }
