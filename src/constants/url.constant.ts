@@ -1,7 +1,7 @@
 export const ROUTES = {
-    BASE_URL: "/",
+    BASE_APP_URL: "/",
     BASE_AUTH_URL: "/auth",
-    BASE_APP_PATH: "/app",
+    BASE_PAGE_PATH: "/page",
     get LOGIN_URL() {
         return `${this.BASE_AUTH_URL}/login`;
     },
@@ -9,10 +9,10 @@ export const ROUTES = {
         return `${this.BASE_AUTH_URL}/create-account`;
     },
     get DEFAULT_PAGE_URL() {
-        return `${this.BASE_APP_PATH}/users`;
+        return `${this.BASE_PAGE_PATH}/home`;
     },
-    get USERS_URL() {
-        return `${this.BASE_APP_PATH}/users`;
+    get HOME_URL() {
+        return `${this.BASE_PAGE_PATH}/home`;
     },
     get FORGOT_PASSWORD() {
         return "/auth/create-account";

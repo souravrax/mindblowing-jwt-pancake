@@ -10,7 +10,9 @@ export default ({ mode }) => {
         plugins: [react()],
         define: {
             "process.env.BASE_URL": JSON.stringify(process.env.BASE_URL),
-            "process.env.ACCESS_TOKEN_EXPIRY": JSON.stringify(process.env.ACCESS_TOKEN_EXPIRY),
+            "process.env.ACCESS_TOKEN_EXPIRY": JSON.stringify(
+                process.env.ACCESS_TOKEN_EXPIRY
+            ),
         },
     });
 };

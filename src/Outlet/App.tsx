@@ -1,27 +1,19 @@
-import React, { CSSProperties, useEffect, useState } from "react";
-import {
-    HeaderNavigation,
-    ALIGN,
-    StyledNavigationList,
-    StyledNavigationItem,
-} from "baseui/header-navigation";
+import React from "react";
 import { useSnackbar } from "baseui/snackbar";
-import { Button, SIZE } from "baseui/button";
+import { Button } from "baseui/button";
 import { Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../auth/useAuth";
-import { DisplayLarge, DisplayMedium, HeadingSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
-import { StyledAppContainer } from "../styles/Global.styles";
+import { StyledAppContainer } from "./Outlet.style";
 import { ROUTES } from "../constants";
 import BulbSvg from "../assets/BulbSvg";
-import GithubLogo from "../assets/GithubLogo";
 
 type AppProps = {
     onToggle: () => void;
 };
 
 export default function App({ onToggle }: AppProps) {
-    const { logout, isUserLoggedIn } = useAuth();
+    const { logout } = useAuth();
     const navigate = useNavigate();
     const { enqueue } = useSnackbar();
 

@@ -13,7 +13,7 @@ import Routes from "./routes/Routes";
 
 const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
-const Users = React.lazy(() => import("./pages/Users/Users"));
+const Users = React.lazy(() => import("./pages/Home/Home"));
 
 const engine = new Styletron();
 

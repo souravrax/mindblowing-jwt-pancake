@@ -1,16 +1,17 @@
 import React, { Suspense } from "react";
 import { Route } from "react-router-dom";
 import { ROUTES } from "../constants";
-import Users from "../pages/Users/Users";
+import Home from "../pages/Home/Home";
+import Page from "../outlet/Page";
 
 export default function AppRoutes() {
     return (
-        <Route path={ROUTES.BASE_APP_PATH}>
+        <Route path={ROUTES.BASE_PAGE_PATH} element={<Page />}>
             <Route
-                path={ROUTES.USERS_URL}
+                path={ROUTES.HOME_URL}
                 element={
                     <Suspense>
-                        <Users />
+                        <Home />
                     </Suspense>
                 }
             />

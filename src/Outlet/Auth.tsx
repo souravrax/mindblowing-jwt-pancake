@@ -1,5 +1,10 @@
 import React from "react";
-import { DisplayLarge, DisplayMedium, DisplaySmall, HeadingSmall } from "baseui/typography";
+import {
+    DisplayLarge,
+    DisplayMedium,
+    DisplaySmall,
+    HeadingSmall,
+} from "baseui/typography";
 import { Outlet } from "react-router-dom";
 
 export default function AuthOutlet() {
