@@ -19,16 +19,6 @@ export default function App({ onToggle }: AppProps) {
 
     const [css, theme] = useStyletron();
 
-    const logoutHandler = async () => {
-        if (await logout()) {
-            navigate(ROUTES.LOGIN_URL, { replace: true });
-        } else {
-            enqueue({
-                message: "No User Logged In",
-            });
-        }
-    };
-
     return (
         <StyledAppContainer
             className={css({

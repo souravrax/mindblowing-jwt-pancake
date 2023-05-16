@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Navigate, Routes as ReactRouterRoutes } from "react-router-dom";
 import { ROUTES } from "../constants";
-import App from "../outlet/App";
+import App from "../outlets/App";
 import AppRoutes from "./PageRoutes";
 import AuthRoutes from "./AuthRoutes";
 
