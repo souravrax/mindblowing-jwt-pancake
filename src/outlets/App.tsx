@@ -6,7 +6,7 @@ import useAuth from "../authentication/useAuth";
 import { useStyletron } from "baseui";
 import { StyledAppContainer } from "./Outlet.style";
 import { ROUTES } from "../constants";
-import BulbSvg from "../assets/BulbSvg";
+import BulbSvg from "../images/BulbSvg";
 
 type AppProps = {
     onToggle: () => void;
