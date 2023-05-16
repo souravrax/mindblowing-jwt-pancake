@@ -1,9 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import AuthOutlet from "../outlet/Auth";
 import { ROUTES } from "../constants";
 import Suspense from "../components/Suspense/Suspense";
 
+const AuthOutlet = React.lazy(() => import("../outlet/Auth"));
 const Login = React.lazy(() => import("../pages/Login/Login"));
 const SignUp = React.lazy(() => import("../pages/SignUp/SignUp"));
 
