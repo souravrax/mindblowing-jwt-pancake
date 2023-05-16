@@ -5,7 +5,7 @@ import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, DarkTheme, BaseProvider } from "baseui";
 import { HashRouter } from "react-router-dom";
-import AuthProvider from "./auth/AuthProvider";
+import AuthProvider from "./authentication/AuthProvider";
 import { SnackbarProvider } from "baseui/snackbar";
 import { ToasterContainer } from "baseui/toast";
 import { useLocalStorage } from "usehooks-ts";

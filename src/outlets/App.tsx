@@ -2,7 +2,7 @@ import React from "react";
 import { useSnackbar } from "baseui/snackbar";
 import { Button } from "baseui/button";
 import { Outlet, useNavigate } from "react-router-dom";
-import useAuth from "../auth/useAuth";
+import useAuth from "../authentication/useAuth";
 import { useStyletron } from "baseui";
 import { StyledAppContainer } from "./Outlet.style";
 import { ROUTES } from "../constants";

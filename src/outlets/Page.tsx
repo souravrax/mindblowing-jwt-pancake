@@ -1,7 +1,7 @@
 import React from "react";
 import { useSnackbar } from "baseui/snackbar";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../auth/useAuth";
+import useAuth from "../authentication/useAuth";
 import { useStyletron } from "baseui";
 import { ROUTES } from "../constants";
 import { ChevronDown, Delete, Overflow, Upload } from "baseui/icon";

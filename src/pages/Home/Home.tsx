@@ -4,7 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../constants";
 import { Table } from "baseui/table-semantic";
 import { Pagination } from "baseui/pagination";
-import useAuth from "../../auth/useAuth";
+import useAuth from "../../authentication/useAuth";
 import { DisplayLarge, DisplayMedium } from "baseui/typography";
 
 const axiosInstance = axios.create({

@@ -8,7 +8,7 @@ import {
 import { FormControl, StyledCaption } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../auth/useAuth";
+import useAuth from "../../authentication/useAuth";
 import AuthContainerCard from "../../components/AuthContainerCard";
 import { StyledAction, StyledBody } from "baseui/card";
 import { ROUTES } from "../../constants";
