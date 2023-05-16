@@ -15,8 +15,11 @@ export const ROUTES = {
         return `${this.BASE_PAGE_PATH}/home`;
     },
     get FORGOT_PASSWORD() {
-        return "/auth/create-account";
+        return `${this.BASE_AUTH_URL}/create-account`;
     },
+    get MY_ACCOUNT() {
+        return `${this.BASE_PAGE_PATH}/my-account`
+    }
 };
 
 export const API_URL = {

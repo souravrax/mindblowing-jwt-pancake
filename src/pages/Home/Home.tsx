@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
-import { VerticalContainer } from "../../styles/Global.styles";
 import { Table } from "baseui/table-semantic";
 import { Pagination } from "baseui/pagination";
 import useAuth from "../../auth/useAuth";

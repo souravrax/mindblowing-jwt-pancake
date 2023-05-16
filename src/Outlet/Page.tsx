@@ -21,6 +21,7 @@ export default function Page() {
             icon: Upload,
             label: "Home",
             active: pathname.includes(ROUTES.HOME_URL),
+            info: "home",
         },
         { icon: Upload, label: "Videos" },
         {
@@ -36,7 +37,7 @@ export default function Page() {
         },
     ]);
     const userItems: NavItem[] = [
-        { icon: Overflow, label: "My Account", info: "my_account" },
+        { icon: Overflow, label: "My Account", info: "my-account" },
         { icon: Overflow, label: "Logout", info: "logout" },
     ];
 
@@ -53,13 +54,22 @@ export default function Page() {
         }
     };
     const onUserItemSelect = (item: NavItem) => {
-        if (item.info === "logout") {
-            (async () => await logoutHandler())();
+        switch (item.info) {
+            case "logout":
+                (async () => await logoutHandler())();
+                break;
+            case "my-account":
+                console.log("firshit");
+                navigate(ROUTES.MY_ACCOUNT);
         }
     };
 
     function handleMainItemSelect(item: NavItem) {
         setMainItems((prev) => setItemActive(prev, item));
+        switch (item.info) {
+            case "home":
+                navigate(ROUTES.HOME_URL);
+        }
     }
 
     return (

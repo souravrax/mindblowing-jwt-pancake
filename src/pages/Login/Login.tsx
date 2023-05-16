@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button } from "baseui/button";
 import {
     DisplayLarge,
-    ParagraphMedium,
     ParagraphSmall,
     ParagraphXSmall,
 } from "baseui/typography";
@@ -14,6 +13,7 @@ import AuthContainerCard from "../../components/AuthContainerCard";
 import { StyledAction, StyledBody } from "baseui/card";
 import { ROUTES } from "../../constants";
 import { useStyletron } from "baseui";
+import { useSnackbar } from "baseui/snackbar";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -22,10 +22,16 @@ const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const [css, theme] = useStyletron();
+
+    const { enqueue } = useSnackbar();
     const loginHandler = async () => {
         setLoading(true);
         if (await login(username, password)) {
             navigate(ROUTES.DEFAULT_PAGE_URL, { replace: true });
+        } else {
+            enqueue({
+                message: "Login Failed",
+            });
         }
         setLoading(false);
     };
