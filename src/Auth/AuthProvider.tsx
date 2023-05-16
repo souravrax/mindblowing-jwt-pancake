@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import AuthContext from "./AuthContext";
 import axios from "axios";
-import { accessTokenManager } from "./TokenManager";
+import { useAccessToken } from "./useAccessToken";
 import { API_URL, ROUTES } from "../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -20,27 +20,29 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const { accessToken, setAccessToken, removeAccessToken } = useAccessToken();
 
     const refreshToken = async () => {
         try {
             const response = await axiosInstance.post(REFRESH_TOKEN_URL);
-            const accessToken = (response.data as SuccessfulAuth).access_token;
+            setAccessToken((response.data as SuccessfulAuth).access_token);
             console.log("Token Refreshed");
-            accessTokenManager.setToken(accessToken);
             return true;
         } catch (e) {
+            removeAccessToken();
             console.log("Unable to refresh token", e);
         }
         return false;
     };
 
-    const isUserLoggedIn = async () => {
-        return accessTokenManager.hasToken() || (await refreshToken());
-    };
+    useEffect(() => {
+        setIsUserLoggedIn(accessToken?.length > 0);
+    }, [accessToken]);
 
     useLayoutEffect(() => {
         const asyncMethod = async () => {
-            const userLoggedIn = await isUserLoggedIn();
+            const userLoggedIn = isUserLoggedIn || (await refreshToken());
             const isAuthPage =
                 pathname.startsWith(ROUTES.LOGIN_URL) ||
                 pathname.startsWith(ROUTES.SIGNUP_URL);
@@ -60,7 +62,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 password,
             });
             const data = response.data as SuccessfulAuth;
-            accessTokenManager.setToken(data.access_token);
+            setAccessToken(data.access_token);
             return true;
         } catch (e) {
             console.log("Error Logging In", e);
@@ -71,7 +73,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const logout = async () => {
         try {
             const response = await axiosInstance.delete(LOGOUT_URL);
-            accessTokenManager.removeToken();
+            removeAccessToken();
             console.log(response.data);
             return true;
         } catch (e) {
@@ -100,6 +102,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const contextValue = useMemo(
         () => ({
+            accessToken,
             refreshToken,
             isUserLoggedIn,
             login,

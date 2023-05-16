@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
-import { accessTokenManager } from "../../Auth/TokenManager";
 import { VerticalContainer } from "../../styles/Global.styles";
 import { Table } from "baseui/table-semantic";
 import { Pagination } from "baseui/pagination";
-import useAuth from "../../Auth/useAuth";
+import useAuth from "../../auth/useAuth";
 import { DisplayLarge } from "baseui/typography";
 import SideNav from "../../components/SideNav";
 
@@ -17,11 +16,11 @@ const axiosInstance = axios.create({
 
 export default function Users() {
     const [pageNumber, setPageNumber] = useState(1);
-    const { isUserLoggedIn, refreshToken } = useAuth();
+    const { isUserLoggedIn, accessToken, refreshToken } = useAuth();
     const [data, setData] = useState([]);
     useEffect(() => {
         const fetchUsers = async () => {
-            if (!(await isUserLoggedIn())) {
+            if (!isUserLoggedIn) {
                 await refreshToken();
             }
             try {
@@ -32,7 +31,7 @@ export default function Users() {
                             page: pageNumber,
                         },
                         headers: {
-                            Authorization: `Bearer ${accessTokenManager.getToken()}`,
+                            Authorization: `Bearer ${accessToken}`,
                         },
                     }
                 );

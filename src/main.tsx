@@ -1,19 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./Outlet/App";
 import "./index.css";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, DarkTheme, BaseProvider } from "baseui";
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import AuthProvider from "./Auth/AuthProvider";
+import { HashRouter } from "react-router-dom";
+import AuthProvider from "./auth/AuthProvider";
 import { SnackbarProvider } from "baseui/snackbar";
 import { ToasterContainer } from "baseui/toast";
-import { ROUTES } from "./constants";
 import { useLocalStorage } from "usehooks-ts";
+import Routes from "./routes/Routes";
 
-import Suspense from "./components/Suspense/Suspense";
-import AuthOutlet from "./Outlet/Auth";
 const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Users = React.lazy(() => import("./pages/Users/Users"));
@@ -32,61 +29,7 @@ const Root = () => {
                     <StyletronProvider value={engine}>
                         <SnackbarProvider>
                             <ToasterContainer>
-                                <Routes>
-                                    <Route
-                                        path="/"
-                                        element={<App onToggle={toggleTheme} />}
-                                    >
-                                        <Route
-                                            path="/auth"
-                                            element={<AuthOutlet />}
-                                        >
-                                            <Route
-                                                path={ROUTES.LOGIN_URL}
-                                                element={
-                                                    <Suspense>
-                                                        <Login />
-                                                    </Suspense>
-                                                }
-                                            />
-
-                                            <Route
-                                                path={ROUTES.SIGNUP_URL}
-                                                element={
-                                                    <Suspense>
-                                                        <SignUp />
-                                                    </Suspense>
-                                                }
-                                            />
-                                        </Route>
-                                        <Route
-                                            path="/"
-                                            element={
-                                                <Navigate
-                                                    to={ROUTES.LOGIN_URL}
-                                                    replace
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path={ROUTES.USERS_URL}
-                                            element={
-                                                <Suspense>
-                                                    <Users />
-                                                </Suspense>
-                                            }
-                                        />
-                                    </Route>
-                                    <Route
-                                        path="*"
-                                        element={
-                                            <Navigate
-                                                to={ROUTES.LOGIN_URL}
-                                                replace
-                                            />
-                                        }
-                                    />
-                                </Routes>
+                                <Routes toggleTheme={toggleTheme} />
                             </ToasterContainer>
                         </SnackbarProvider>
                     </StyletronProvider>

@@ -8,20 +8,19 @@ import {
 import { useSnackbar } from "baseui/snackbar";
 import { Button, SIZE } from "baseui/button";
 import { Outlet, useNavigate } from "react-router-dom";
-import useAuth from "../Auth/useAuth";
+import useAuth from "../auth/useAuth";
 import { DisplayLarge, DisplayMedium, HeadingSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
 import { StyledAppContainer } from "../styles/Global.styles";
 import { ROUTES } from "../constants";
-import BulbSvg from "../Assets/BulbSvg";
-import GithubLogo from "../Assets/GithubLogo";
+import BulbSvg from "../assets/BulbSvg";
+import GithubLogo from "../assets/GithubLogo";
 
 type AppProps = {
     onToggle: () => void;
 };
 
 export default function App({ onToggle }: AppProps) {
-    const [loggedIn, setLoggedIn] = useState(false);
     const { logout, isUserLoggedIn } = useAuth();
     const navigate = useNavigate();
     const { enqueue } = useSnackbar();
@@ -37,12 +36,6 @@ export default function App({ onToggle }: AppProps) {
             });
         }
     };
-
-    useEffect(() => {
-        (async () => {
-            setLoggedIn(await isUserLoggedIn());
-        })();
-    }, []);
 
     return (
         <StyledAppContainer

@@ -1,9 +1,22 @@
 export const ROUTES = {
-    LOGIN_URL: "/auth/login",
-    SIGNUP_URL: "/auth/create-account",
-    DEFAULT_PAGE_URL: "/users",
-    USERS_URL: "/users",
-    FORGOT_PASSWORD: "/auth/create-account",
+    BASE_URL: "/",
+    BASE_AUTH_URL: "/auth",
+    BASE_APP_PATH: "/app",
+    get LOGIN_URL() {
+        return `${this.BASE_AUTH_URL}/login`;
+    },
+    get SIGNUP_URL() {
+        return `${this.BASE_AUTH_URL}/create-account`;
+    },
+    get DEFAULT_PAGE_URL() {
+        return `${this.BASE_APP_PATH}/users`;
+    },
+    get USERS_URL() {
+        return `${this.BASE_APP_PATH}/users`;
+    },
+    get FORGOT_PASSWORD() {
+        return "/auth/create-account";
+    },
 };
 
 export const API_URL = {
